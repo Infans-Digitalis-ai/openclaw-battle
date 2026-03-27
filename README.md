@@ -43,7 +43,11 @@ Battle-Agents/
    ```
 
 2. **Install dependencies**
+   
+   Recommended (keeps system Python clean):
    ```bash
+   python3 -m venv .venv
+   . .venv/bin/activate
    pip install -r requirements.txt
    ```
 
@@ -51,6 +55,8 @@ Battle-Agents/
    ```bash
    python main.py
    ```
+
+> Note: `torch` is optional unless you run the `DQNController` (training mode). The new controller architecture supports lightweight and remote-controlled play.
 
 4. **Watch the learning** — agents train continuously. After hundreds or thousands of rounds, they evolve sophisticated tactics that you can observe in real time.
 

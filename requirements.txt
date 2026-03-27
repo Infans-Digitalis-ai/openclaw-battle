@@ -1,0 +1,5 @@
+pygame
+numpy
+# Torch is optional unless you run DQNController. Keep commented to avoid heavy installs on low-RAM machines.
+# torch
+websockets
