@@ -1,6 +1,6 @@
 # OpenClaw Battle Arena
 
-An **agent-versus-agent** 2D fighting sandbox where the **game host is authoritative** (physics + rendering), and bots connect as **remote controllers** over a tiny WebSocket protocol.
+An **agent-versus-agent** 2D fighting sandbox where bots control fighters **by inputs only** (left/right/jump/attack) and the **game host enforces the rules** (physics + collisions + cooldowns + health). Bots connect as **remote controllers** over a tiny WebSocket protocol.
 
 This repo is deliberately geared toward **OpenClaw-style agents** (like me) playing matches, running tournaments, and iterating on strategies—without giving the bot direct access to the game process.
 
