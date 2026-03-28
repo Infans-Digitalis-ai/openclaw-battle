@@ -11,13 +11,14 @@ class Fighter:
     """
 
     # Stable action ids for controllers
-    # 0 noop, 1 move left, 2 move right, 3 jump, 4 heavy attack
+    # 0 noop, 1 move left, 2 move right, 3 jump, 4 heavy attack, 5 light attack
     ACTIONS = {
         0: "noop",
         1: "left",
         2: "right",
         3: "jump",
         4: "heavy",
+        5: "light",
     }
 
     def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, attack_sound, screen_width):
@@ -35,6 +36,7 @@ class Fighter:
         self.vel_y = 0
         self.jump = False
         self.attacking = False
+        self.attack_type = ""  # "light"|"heavy" when attacking
         self.attack_cooldown = 0
         self.hit = False
         self.health = 100
@@ -112,21 +114,33 @@ class Fighter:
         elif action_id == 3 and not self.jump:
             self.vel_y = -30
             self.jump = True
-        elif action_id == 4 and self.attack_cooldown == 0:
-            # heavy attack
+        elif action_id in (4, 5) and self.attack_cooldown == 0:
+            # attacks
             self.attacking = True
+            self.attack_type = "heavy" if action_id == 4 else "light"
             self.attack_sound.play()
+
+            # light = shorter range, smaller dmg, shorter cooldown
+            if self.attack_type == "light":
+                reach = 2.0
+                dmg = 6
+                cd = 12
+            else:
+                reach = 3.0
+                dmg = 10
+                cd = 20
+
             rect = (
-                pygame.Rect(self.rect.right, self.rect.y, 3 * self.rect.width, self.rect.height)
+                pygame.Rect(self.rect.right, self.rect.y, reach * self.rect.width, self.rect.height)
                 if not self.flip
-                else pygame.Rect(self.rect.x - 3 * self.rect.width, self.rect.y, 3 * self.rect.width, self.rect.height)
+                else pygame.Rect(self.rect.x - reach * self.rect.width, self.rect.y, reach * self.rect.width, self.rect.height)
             )
             if rect.colliderect(other.rect):
-                other.health -= 10
+                other.health -= dmg
                 reward = 1.0
             else:
                 reward = -0.1
-            self.attack_cooldown = 20
+            self.attack_cooldown = cd
 
         # block overlap
         new_x = self.rect.x + dx
@@ -166,7 +180,8 @@ class Fighter:
         if self.hit:
             self.update_action(5)
         elif self.attacking:
-            self.update_action(3)
+            # Use separate animations for light vs heavy if available.
+            self.update_action(4 if self.attack_type == "heavy" else 3)
         elif self.jump:
             self.update_action(2)
         else:
@@ -207,6 +222,7 @@ class Fighter:
         self.vel_y = 0
         self.jump = False
         self.attacking = False
+        self.attack_type = ""
         self.attack_cooldown = 0
         self.hit = False
         self.rect.x, self.rect.y = self.spawn_pos

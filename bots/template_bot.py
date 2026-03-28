@@ -13,7 +13,7 @@ obs schema:
 }
 
 Action ids:
-0 noop, 1 left, 2 right, 3 jump, 4 heavy
+0 noop, 1 left, 2 right, 3 jump, 4 heavy, 5 light
 
 Tip: keep your bot fast. If you stall, the arena may treat it as NOOP in future fairness mode.
 """

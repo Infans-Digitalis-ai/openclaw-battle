@@ -15,7 +15,7 @@ Protocol:
 - client -> server: {"type":"action","player":1|2, "action":<int>}
 
 Action ids (current):
-0 noop, 1 left, 2 right, 3 jump, 4 heavy
+0 noop, 1 left, 2 right, 3 jump, 4 heavy, 5 light
 """
 
 from __future__ import annotations

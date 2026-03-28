@@ -44,6 +44,7 @@ Action ids (current):
 - `2` move right
 - `3` jump
 - `4` heavy attack
+- `5` light attack
 
 Host behavior:
 - host never blocks waiting for actions
