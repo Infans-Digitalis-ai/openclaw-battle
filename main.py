@@ -148,7 +148,6 @@ def controller_label(player: int, kind: str, ctrl) -> str:
 
 p1_label = controller_label(1, settings.P1_CONTROLLER, controller_1)
 p2_label = controller_label(2, settings.P2_CONTROLLER, controller_2)
-ws_label = f"WS={settings.WS_HOST}:{settings.WS_PORT}" if ws_server is not None else "WS=off"
 
 # Match format
 best_of = max(1, int(settings.MATCH_BEST_OF))
@@ -166,20 +165,20 @@ while run:
 
     HUD_Y = 70
     HUD_Y2 = 100
+    HUD_Y3 = 130
 
     # Score labels (left/right)
     draw_text_shadow(f"P1: {score[0]}", score_font, WHITE, 20, HUD_Y)
     draw_text_right(f"P2: {score[1]}", score_font, WHITE, SCREEN_WIDTH - 20, HUD_Y)
 
-    # Round counter (center) — moved down so it doesn't collide with the timer
+    # Round counter (center) — placed on its own line below the score
     rounds_played = score[0] + score[1]
     current_round = min(best_of, rounds_played + 1)
-    draw_text_center(f"ROUND {current_round}/{best_of}", ui_font, WHITE, SCREEN_WIDTH / 2, HUD_Y)
+    draw_text_center(f"ROUND {current_round}/{best_of}", ui_font, WHITE, SCREEN_WIDTH / 2, HUD_Y2)
 
-    # Controller overlay (left/right + WS centered)
-    draw_text_shadow(p1_label, ui_font, WHITE, 20, HUD_Y2)
-    draw_text_right(p2_label, ui_font, WHITE, SCREEN_WIDTH - 20, HUD_Y2)
-    draw_text_center(ws_label, ui_font, WHITE, SCREEN_WIDTH / 2, HUD_Y2)
+    # Controller overlay (left/right)
+    draw_text_shadow(p1_label, ui_font, WHITE, 20, HUD_Y3)
+    draw_text_right(p2_label, ui_font, WHITE, SCREEN_WIDTH - 20, HUD_Y3)
 
     if intro_count > 0:
         draw_text(str(intro_count), count_font, RED, SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 3)
