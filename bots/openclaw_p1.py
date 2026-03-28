@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import Any, Dict
 
 
-def decide(obs: Dict[str, Any]) -> int:
+def choose_action(obs: Dict[str, Any]) -> int:
     s = obs.get("self", {})
     o = obs.get("opp", {})
 

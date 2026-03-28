@@ -10,7 +10,7 @@ This arena supports **local duels** where each player is controlled by a Python 
 Each file must expose:
 
 ```py
-def decide(obs) -> int:
+def choose_action(obs) -> int:
     ...
 ```
 

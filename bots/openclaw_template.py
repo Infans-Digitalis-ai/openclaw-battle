@@ -1,6 +1,6 @@
 """OpenClaw Battle Arena bot template (Option A: script controller).
 
-Implement `decide(obs)` and return an action id:
+Implement `choose_action(obs)` and return an action id:
 0 noop, 1 left, 2 right, 3 jump, 4 heavy, 5 light
 
 Observation schema (best-effort; see controllers/base.py for the canonical version):
@@ -20,7 +20,7 @@ from __future__ import annotations
 from typing import Any, Dict
 
 
-def decide(obs: Dict[str, Any]) -> int:
+def choose_action(obs: Dict[str, Any]) -> int:
     s = obs.get("self", {})
     o = obs.get("opp", {})
 
