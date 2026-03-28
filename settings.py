@@ -19,8 +19,13 @@ MODE = "MATCH"
 MATCH_BEST_OF = 3  # best-of-3 rounds
 
 # Controller selection
+# Options: "remote" (ws), "heuristic", "dqn", "script"
 P1_CONTROLLER = "remote"    # warrior
-P2_CONTROLLER = "heuristic" # wizard (start with heuristic so we can watch P1 remote work)
+P2_CONTROLLER = "heuristic" # wizard
+
+# Option A (script bots): set controller to "script" and provide a script path.
+P1_SCRIPT_PATH = "bots/aggressive_heavy.py"
+P2_SCRIPT_PATH = "bots/aggressive_heavy.py"
 
 # WebSocket server (used when any controller is "remote")
 WS_HOST = "127.0.0.1"

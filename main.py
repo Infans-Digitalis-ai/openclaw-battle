@@ -135,8 +135,20 @@ if settings.P1_CONTROLLER.lower() in ("remote", "ws", "remote-ws", "websocket") 
     ws_server = BattleAgentsWSServer(host=settings.WS_HOST, port=settings.WS_PORT)
     ws_server.start()
 
-controller_1 = make_controller(settings.P1_CONTROLLER, player=1, screen_width=SCREEN_WIDTH, ws_server=ws_server)
-controller_2 = make_controller(settings.P2_CONTROLLER, player=2, screen_width=SCREEN_WIDTH, ws_server=ws_server)
+controller_1 = make_controller(
+    settings.P1_CONTROLLER,
+    player=1,
+    screen_width=SCREEN_WIDTH,
+    ws_server=ws_server,
+    script_path=getattr(settings, "P1_SCRIPT_PATH", None),
+)
+controller_2 = make_controller(
+    settings.P2_CONTROLLER,
+    player=2,
+    screen_width=SCREEN_WIDTH,
+    ws_server=ws_server,
+    script_path=getattr(settings, "P2_SCRIPT_PATH", None),
+)
 
 def controller_label(player: int, kind: str, ctrl) -> str:
     name = getattr(ctrl, "name", "")
