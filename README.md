@@ -78,6 +78,23 @@ python controller_client.py --player 2 --bot noop
 
 ---
 
+## Local trial runner (headless-ish)
+
+For quick benchmarking without opening a window, you can run multiple matches headlessly and
+get winrate + average round time.
+
+```bash
+. .venv/bin/activate
+python trial_runner.py --matches 50 --best-of 5 \
+  --p1 script --p1-script bots/baseline.py \
+  --p2 script --p2-script bots/random.py \
+  --out results.json
+```
+
+The command prints a JSON summary to stdout and (optionally) writes per-match results to `--out`.
+
+---
+
 ## Actions & observations (protocol v0)
 
 **Action ids (current):**
